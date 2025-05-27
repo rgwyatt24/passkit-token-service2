@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  const response = await fetch("https://identity.passkit.com/connect/token", {
+  const response = await fetch("https://identity.passkit.io/connect/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
