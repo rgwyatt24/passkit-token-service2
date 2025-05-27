@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
     const auth = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
 
-    const response = await fetch("https://login.passkit.io/token", {
+    const response = await fetch("https://login.passkit.com/token", {
       method: "POST",
       headers: {
         "Authorization": `Basic ${auth}`,
