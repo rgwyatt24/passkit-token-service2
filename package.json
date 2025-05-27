@@ -1,6 +1,14 @@
 {
+  "name": "passkit-token-service2",
+  "version": "1.0.0",
+  "description": "Secure token service for PassKit access",
+  "main": "index.js",
   "type": "module",
-  "dependencies": {
-    "node-fetch": "^3.3.2"
-  }
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "MIT"
 }
