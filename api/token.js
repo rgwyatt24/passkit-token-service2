@@ -1,28 +1,27 @@
-import fetch from 'node-fetch';
-
 export default async function handler(req, res) {
   try {
-    const response = await fetch("https://identity.passkit.io/connect/token", {
+    const clientId = process.env.PASSKIT_CLIENT_ID;
+    const clientSecret = process.env.PASSKIT_CLIENT_SECRET;
+
+    const auth = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
+
+    const response = await fetch("https://login.passkit.io/token", {
       method: "POST",
       headers: {
+        "Authorization": `Basic ${auth}`,
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: new URLSearchParams({
-        client_id: process.env.PASSKIT_CLIENT_ID,
-        client_secret: process.env.PASSKIT_CLIENT_SECRET,
-        grant_type: "client_credentials",
-        scope: "api"
-      })
+      body: "grant_type=client_credentials"
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      return res.status(response.status).json({ error: data });
+      throw new Error(data.error || "Failed to get token");
     }
 
-    return res.status(200).json(data);
-  } catch (error) {
-    return res.status(500).json({ error: "Internal server error", details: error.message });
+    res.status(200).json({ accessToken: data.access_token });
+  } catch (err) {
+    res.status(500).json({ error: "Token fetch failed", details: err.message });
   }
 }
