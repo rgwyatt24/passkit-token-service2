@@ -1,7 +1,7 @@
 {
   "functions": {
-    "api/token/index.js": {
-      "memory": 128
+    "api/token.js": {
+      "runtime": "nodejs18.x"
     }
   }
 }
