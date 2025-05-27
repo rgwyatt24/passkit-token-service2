@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/token/index.js": {
+      "memory": 128
+    }
+  }
+}
